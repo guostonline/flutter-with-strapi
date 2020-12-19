@@ -2,11 +2,14 @@ import 'dart:async';
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:json/Pages/AuthPage.dart';
 
 import 'Functions/myFunction.dart';
 import 'model/model.dart';
 
-void main() => runApp(MyApp());
+void main() => runApp(MaterialApp(
+      home: AuthPage(),
+    ));
 
 class MyApp extends StatefulWidget {
   MyApp({Key key}) : super(key: key);
@@ -40,15 +43,21 @@ class _MyAppState extends State<MyApp> {
             future: getArticles(),
             builder: (context, snapshot) {
               if (snapshot.hasData) {
-                return ListView.builder(
-                    itemCount: snapshot.data.length,
-                    itemBuilder: (context, index) {
-                      Articles item = snapshot.data[index];
-                      return ListTile(
-                        title: Text(item.titile),
-                        trailing: Text(item.publishedAt.toString()),
-                      );
-                    });
+                return Column(
+                  children: [
+                    ListView.builder(
+                        itemCount: snapshot.data.length,
+                        itemBuilder: (context, index) {
+                          Articles item = snapshot.data[index];
+                          return ListTile(
+                            title: Text(item.titile),
+                          );
+                        }),
+                    RaisedButton(
+                        onPressed: () =>
+                            putAuth("latifa", "latifa@gmail.com", "latifa123"))
+                  ],
+                );
               } else if (snapshot.hasError) {
                 return Text("${snapshot.error}");
               }
