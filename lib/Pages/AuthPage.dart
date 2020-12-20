@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:json/Functions/myFunction.dart';
+import 'package:json/main.dart';
 
 TextEditingController txtUser = TextEditingController();
 TextEditingController txtEmail = TextEditingController();
@@ -49,6 +50,15 @@ class AuthPage extends StatelessWidget {
                       print(textPassword.text.toString());
                       putAuth(txtUser.text, txtEmail.text, textPassword.text);
                     })),
+            RaisedButton(
+                child: Text("View"),
+                onPressed: () {
+                  print(getCategories().toString());
+                }),
+            /*
+                onPressed: () => Navigator.push(
+                    context, MaterialPageRoute(builder: (context) => MyApp()))),
+                    */
           ],
         ),
       ),

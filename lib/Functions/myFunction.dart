@@ -1,15 +1,36 @@
 import 'dart:convert';
 
 import 'package:http/http.dart' as http;
+import 'package:json/model/CategoriesModel.dart';
+import 'package:json/model/Hold.dart';
 import 'package:json/model/model.dart';
 
 // fuction to get article from strapi or api server
-Future<List<Articles>> getArticles() async {
+Future<List<Article>> getArticles() async {
   String url = "https://shielded-scrubland-73184.herokuapp.com/articles";
   http.Response response = await http.get(url);
   String jsonString = response.body;
-  List<Articles> articles = articlesFromJson(jsonString);
+  List<Article> articles = articleFromJson(jsonString);
+  print(jsonString);
   return articles;
+}
+
+Future<List<Category>> getCategories() async {
+  String url = "https://shielded-scrubland-73184.herokuapp.com/categories";
+  var response = await http.get(url);
+  String jsonString = response.body;
+  List<Category> categories = categoryFromJson(jsonString);
+  print(jsonString);
+  return categories;
+}
+
+Future<List<User>> getHold() async {
+  String url = "https://jsonplaceholder.typicode.com/users";
+  http.Response response = await http.get(url);
+  String jsonString = response.body;
+  List<User> categories = userFromJson(jsonString);
+  print(jsonString);
+  return categories;
 }
 
 Future<dynamic> putAuth(String user, String email, String password) async {
