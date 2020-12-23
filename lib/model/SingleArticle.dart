@@ -1,17 +1,16 @@
 // To parse this JSON data, do
 //
-//     final article = articleFromJson(jsonString);
+//     final singleArticle = singleArticleFromJson(jsonString);
 
 import 'dart:convert';
 
-List<Article> articleFromJson(String str) =>
-    List<Article>.from(json.decode(str).map((x) => Article.fromJson(x)));
+SingleArticle singleArticleFromJson(String str) =>
+    SingleArticle.fromJson(json.decode(str));
 
-String articleToJson(List<Article> data) =>
-    json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
+String singleArticleToJson(SingleArticle data) => json.encode(data.toJson());
 
-class Article {
-  Article({
+class SingleArticle {
+  SingleArticle({
     this.articles,
     this.id,
     this.title,
@@ -26,7 +25,7 @@ class Article {
     this.v,
     this.categorie,
     this.image,
-    this.articleId,
+    this.singleArticleId,
   });
 
   List<dynamic> articles;
@@ -43,9 +42,9 @@ class Article {
   int v;
   Categorie categorie;
   Image2 image;
-  String articleId;
+  String singleArticleId;
 
-  factory Article.fromJson(Map<String, dynamic> json) => Article(
+  factory SingleArticle.fromJson(Map<String, dynamic> json) => SingleArticle(
         articles: List<dynamic>.from(json["articles"].map((x) => x)),
         id: json["_id"],
         title: json["title"],
@@ -60,7 +59,7 @@ class Article {
         v: json["__v"],
         categorie: Categorie.fromJson(json["categorie"]),
         image: Image2.fromJson(json["image"]),
-        articleId: json["id"],
+        singleArticleId: json["id"],
       );
 
   Map<String, dynamic> toJson() => {
@@ -78,7 +77,7 @@ class Article {
         "__v": v,
         "categorie": categorie.toJson(),
         "image": image.toJson(),
-        "id": articleId,
+        "id": singleArticleId,
       };
 }
 

@@ -3,15 +3,30 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:json/model/CategoriesModel.dart';
 import 'package:json/model/Hold.dart';
+import 'package:json/model/SingleArticle.dart';
 import 'package:json/model/model.dart';
 
 // fuction to get article from strapi or api server
 Future<List<Article>> getArticles() async {
-  String url = "https://shielded-scrubland-73184.herokuapp.com/articles";
+  try {
+    String url = "https://shielded-scrubland-73184.herokuapp.com/articles";
+    http.Response response = await http.get(url);
+    String jsonString = response.body;
+    List<Article> articles = articleFromJson(jsonString);
+    print(jsonString);
+    return articles;
+  } catch (e) {
+    print(e);
+  }
+}
+
+Future<SingleArticle> getSingleArticles(String articleID) async {
+  String url =
+      "https://shielded-scrubland-73184.herokuapp.com/articles/$articleID";
   http.Response response = await http.get(url);
   String jsonString = response.body;
-  List<Article> articles = articleFromJson(jsonString);
-  print(jsonString);
+  SingleArticle articles = singleArticleFromJson(jsonString);
+  print("chakib function " + articles.id + " " + articles.title);
   return articles;
 }
 

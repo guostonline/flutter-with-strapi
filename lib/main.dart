@@ -3,6 +3,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:json/Pages/AuthPage.dart';
+import 'package:json/Pages/InforamtionTest.dart';
 import 'package:json/model/CategoriesModel.dart';
 
 import 'Functions/myFunction.dart';
@@ -59,9 +60,8 @@ class _MyAppState extends State<MyApp> {
                               onTap: () => Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                      builder: (context) => InformationPage(
-                                          categories: item.articles,
-                                          image: item.image.url))),
+                                      builder: (context) =>
+                                          InformationTest(articleId: item.id))),
                               child: ListTile(
                                   title: Text(item.title),
                                   leading: CircleAvatar(
