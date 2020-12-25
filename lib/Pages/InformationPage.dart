@@ -1,5 +1,6 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
+import 'package:json/Widgets/InformaitonWidgets.dart';
 
 import 'package:json/model/model.dart';
 
@@ -15,37 +16,36 @@ class InformationPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-          child: Column(
-        children: [
-          Expanded(
-            child: ListView.builder(
-                itemCount: article.articles.length,
-                itemBuilder: (context, index) {
-                  var item = article.articles[index];
-                  return Column(
-                    children: [
-                      InkWell(
-                        onTap: () {
-                          _showMaterialDialog(
-                              context,
-                              item.title,
-                              item.image.url,
-                              item.title,
-                              item.description,
-                              item.createdAt.toString());
-                        },
-                        child: ListTile(
-                            title: Text(item.title),
-                            leading: CircleAvatar(
-                                backgroundImage: NetworkImage(item.image.url))),
+      body: SafeArea(
+        child: Column(
+          children: [
+            informationWidget(
+                title: article.title,
+                desc: article.description,
+                dateAchat: article.dateAchat,
+                etat: article.etat,
+                image: article.image.url,
+                priceAchat: article.price.toString(),
+                city: article.city,
+                phone: article.telephone),
+            Expanded(
+              child: ListView.builder(
+                  itemCount: article.articles.length,
+                  itemBuilder: (context, index) {
+                    return ListTile(
+                      leading: CircleAvatar(
+                        backgroundImage:
+                            NetworkImage(article.articles[index].image.url),
                       ),
-                    ],
-                  );
-                }),
-          ),
-        ],
-      )),
+                      title: Text(article.articles[index].title),
+                      subtitle: Text(
+                          "Prix d'achat est ${article.articles[index].price} dh"),
+                    );
+                  }),
+            )
+          ],
+        ),
+      ),
     );
   }
 

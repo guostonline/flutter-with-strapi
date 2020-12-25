@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:json/Widgets/InformaitonWidgets.dart';
 import 'package:json/model/SingleArticle.dart';
-import 'package:json/model/model.dart';
-import 'package:json/Functions/myFunction.dart';
+import 'package:json/Functions/StrapiFunction.dart';
 
 class InformationTest extends StatelessWidget {
   final String articleId;
@@ -29,15 +27,17 @@ class InformationTest extends StatelessWidget {
                           child: Card(
                             child: ListView(
                               children: [
-                                Text(article.title),
+                                Text("article.title")
+                                /*
                                 informationWidget(
                                     article.title,
                                     article.description,
-                                    article.image.url,
+                                    // article.image.url,
                                     article.etat,
                                     article.price.toString(),
-                                    article.etat,
+                                    article.telephone,
                                     article.city)
+                                    */
                               ],
                             ),
                           ),

@@ -1,7 +1,9 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-Container informationWidget(
+Widget informationWidget({
   String title,
   String desc,
   String image,
@@ -9,19 +11,30 @@ Container informationWidget(
   String priceAchat,
   String etat,
   String city,
-) {
-  return Container(
-    child: Column(
-      children: [
-        Image.network(image, fit: BoxFit.cover),
-        informationRow("Produit", title),
-        informationRow("Date Achat", dateAchat),
-        informationRow("Prix d'achat", priceAchat),
-        Text("Discription"),
-        Text(desc),
-        informationRow("Etat", etat),
-        informationRow("Ville", city),
-      ],
+  String phone,
+}) {
+  return Card(
+    child: Container(
+      padding: EdgeInsets.all(5),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Container(
+              width: double.infinity,
+              child: Image.network(image, fit: BoxFit.cover)),
+          informationRow("Produit", title),
+          informationRow("Date Achat", dateAchat),
+          informationRow("Prix d'achat", priceAchat),
+          Divider(
+            height: 5,
+            indent: 5,
+          ),
+          descContainer(desc),
+          informationRow("Etat", etat),
+          informationRow("Ville", city),
+          informationRow("Téléphone", phone),
+        ],
+      ),
     ),
   );
 }
@@ -29,11 +42,34 @@ Container informationWidget(
 Container informationRow(String title, String desc) {
   return Container(
     child: DefaultTextStyle(
-      style: GoogleFonts.abel(fontSize: 20),
+      style: GoogleFonts.raleway(
+          fontSize: 16, color: Colors.black, fontWeight: FontWeight.bold),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [Text(title), Text(desc)],
+        children: [
+          Text(title),
+          Text(
+            desc,
+            style: TextStyle(fontSize: 18, fontWeight: FontWeight.normal),
+          )
+        ],
       ),
+    ),
+  );
+}
+
+Container descContainer(String text) {
+  return Container(
+    padding: EdgeInsets.all(5),
+    decoration: BoxDecoration(color: Colors.yellow.withOpacity(0.5)),
+    width: double.infinity,
+    height: 50,
+    child: Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text("Descprition..", style: TextStyle(fontWeight: FontWeight.bold)),
+        AutoSizeText(text),
+      ],
     ),
   );
 }
