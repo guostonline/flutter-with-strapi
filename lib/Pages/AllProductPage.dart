@@ -66,7 +66,7 @@ class _MyAppState extends State<AllProductPage> {
                                         NetworkImage(item.image.url),
                                   ),
                                   title: Text(item.title),
-                                  subtitle: Text(item.price.toString())),
+                                  subtitle: Text(item.categorie.name)),
                             );
                           }),
                     ),

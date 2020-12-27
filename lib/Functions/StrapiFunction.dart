@@ -11,7 +11,7 @@ import 'package:json/model/model.dart';
 // fuction to get article from strapi or api server
 Future<List<Article>> getArticles() async {
   String url = "https://shielded-scrubland-73184.herokuapp.com/articles";
-  http.Response response = await http.get(url);
+  http.Response response = await http.post(url);
   int responceCode = response.statusCode;
   String jsonString = response.body;
   List<Article> articles = articleFromJson(jsonString);
@@ -77,14 +77,15 @@ Future<String> logIn(String email, String password) async {
   }
 }
 
-Future<dynamic> postAnArticle(String articleId) async {
+Future<dynamic> postAnArticle(String articleId, int price) async {
   String url = "https://shielded-scrubland-73184.herokuapp.com/articles";
-  http.Response response = await http.post(url, headers: {
+  http.Response response = await http.put(url, headers: {
     "Authorization":
         "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVmZTQ1YjM5ZDIzM2MxMDAxNzIwZTc3OCIsImlhdCI6MTYwODg5OTE4OCwiZXhwIjoxNjExNDkxMTg4fQ.FcIAea-0h7LBKI1zq1gczycg1bjAe9JPYKjfO799mCg"
   }, body: {
     "title": "super cool",
     "Description": "super cool",
+    "price": price
   });
   String jsonString = response.body;
   // Map test = jsonDecode(jsonString);

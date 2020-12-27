@@ -21,6 +21,7 @@ class InformationPage extends StatelessWidget {
           children: [
             informationWidget(
                 title: article.title,
+                catergorie: article.categorie.name,
                 desc: article.description,
                 dateAchat: article.dateAchat,
                 etat: article.etat,

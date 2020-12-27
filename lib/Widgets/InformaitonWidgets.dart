@@ -5,6 +5,7 @@ import 'package:google_fonts/google_fonts.dart';
 
 Widget informationWidget({
   String title,
+  String catergorie,
   String desc,
   String image,
   String dateAchat,
@@ -14,6 +15,7 @@ Widget informationWidget({
   String phone,
 }) {
   return Card(
+    elevation: 5,
     child: Container(
       padding: EdgeInsets.all(5),
       child: Column(
@@ -23,6 +25,7 @@ Widget informationWidget({
               width: double.infinity,
               child: Image.network(image, fit: BoxFit.cover)),
           informationRow("Produit", title),
+          informationRow("Categorie", catergorie),
           informationRow("Date Achat", dateAchat),
           informationRow("Prix d'achat", priceAchat),
           Divider(
